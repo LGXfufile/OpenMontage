@@ -44,3 +44,39 @@ jobs:
 
       - name: Run test suite
         run: make test
+
+  backlot-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install hosted Backlot dependencies
+        run: python -m pip install -r api/requirements.txt httpx
+      - name: Verify hosted application
+        run: |
+          python - <<'PY'
+          from fastapi.testclient import TestClient
+          from api.index import app
+
+          client = TestClient(app)
+          assert client.get("/api/health").json() == {"ok": True, "app": "backlot"}
+          projects = client.get("/api/projects").json()
+          assert any(project["project_id"] == "openmontage-demo" for project in projects)
+          PY
+
+  remotion-install:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: remotion-composer
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: remotion-composer/package-lock.json
+      - run: npm ci

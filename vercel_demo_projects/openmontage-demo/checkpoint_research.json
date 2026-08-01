@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "project_id": "openmontage-demo",
+  "pipeline_type": "cinematic",
+  "stage": "research",
+  "status": "completed",
+  "timestamp": "2026-08-01T00:01:00+00:00",
+  "checkpoint_policy": "guided",
+  "human_approval_required": false,
+  "human_approved": false,
+  "artifacts": {}
+}
