@@ -2,7 +2,7 @@
   "version": "1.0",
   "created_at": "2026-08-01T00:00:00+00:00",
   "project_id": "openmontage-demo",
-  "title": "OpenMontage Hosted Demo",
+  "title": "Hosted Read-Only Demo · Run Locally to Create",
   "pipeline_type": "cinematic",
   "style_playbook": "clean-professional"
 }
